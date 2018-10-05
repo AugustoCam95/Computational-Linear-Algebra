@@ -1,0 +1,21 @@
+function [autovalores] = questao2(A)
+          
+         if (argn(2) == 1) then
+             
+             funcprot(0);
+             exec("tol.sci");
+             TOL = 1E-4;
+             n = size(A,1);
+             tolerancia = 1;
+             while(tolerancia == 1)
+                 // aplicando a decomposição LU em A
+                 [L, R] = qr(A);
+                 A = R*L; 
+                 tolerancia = tol(A, TOL);
+             end
+          
+             autovalores = diag(A);
+          end     
+
+endfunction
+

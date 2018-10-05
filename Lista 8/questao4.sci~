@@ -1,0 +1,13 @@
+function [auto_rutis, auto_francis, teste] = questao4()
+        
+        A = rand(7,7);
+        A = A * A'; // Dessa maneira a matriz fica simétrica
+        
+        exec("lr.sci");
+        exec("questao3.sci");
+        
+        auto_rutis = lr(A);
+        auto_francis = questao3(A);
+        teste = spec(A);
+        
+endfunction

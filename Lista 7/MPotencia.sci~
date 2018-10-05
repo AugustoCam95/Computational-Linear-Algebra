@@ -1,0 +1,17 @@
+// sempre eh bom colocar função na extensão .sci
+
+function [y, x]= MPotencia(A)
+    
+    [l,c] = size(A);
+    x = ones(l,1);
+    err = 1;
+    while (err > 1E-4)
+    
+        y = A*x ;
+        y_i=norm(y);
+        err = abs(norm(x) - norm(y./y_i))/abs(norm(x));
+        x=y./y_i;
+    end
+    
+    
+endfunction

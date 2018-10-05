@@ -1,0 +1,69 @@
+// Decomposição LU
+
+function [L, U] = DLU(A)
+        
+        [m, n] = size(A);
+        // numero de argmentos de entrada for 1 e a matriz for quadratica
+        if(argn(2) == 1) & ( m == m) then
+            
+            L = eye(n, n);
+            U = eye(n, n); 
+           
+           // incialização
+           //disp(1);
+           U(1,1) = A(1,1)/L(1,1);
+           
+           if ( (L(1,1) * U(1,1)) == 0 ) then
+              return;
+           end
+           
+           //disp(2); 
+           for j = 2 : n 
+               U(1, j) = A(1,j)./L(1,1); // primeira linha de U
+               L(j, 1) = A(j,1)./U(1,1); // primeira coluna de L
+           end
+           
+           //disp(3);
+           for i = 2 : n
+               
+               //disp(i);
+               //Selecionar
+               soma = 0;
+               for k = 1 : 1
+                  soma = ( L(i,k) * U(k, i) ) + soma;
+               end
+               U(i,i) = A(i,i) - soma;
+               //disp(L(i,i) * U(i,i))
+              
+              // aplicando a dica dada na lista 8 
+               for j = 2  : n // passo 5
+                   
+                   if (i < j) then
+                      soma1 = 0;
+                      for k = 1 : i - 1
+                         soma1 = ( L(i,k) * U(k,j) ) + soma1;
+                      end 
+                      U(i, j) = A(i,j) - soma1;   
+                   end
+                  
+                   if (i > j) then
+                      soma2 = 0;
+                      for k = 1 : j - 1
+                         soma2 = ( L(i,k) * U(k,j) ) + soma2;
+                      end 
+                      L(i, j) = 1 ./U(j,j) * (A(i,j) - soma2);
+                   end
+                 
+               end
+               
+           end //for do i
+           
+          //Passo 6
+           soma = 0;
+           for k = 1 : n -1
+               soma = (L(n,k) * U(k,n)) + soma;           
+           end
+           U(n,n) = (A(n,n) - soma)./L(n,n);
+        end 
+        
+endfunction

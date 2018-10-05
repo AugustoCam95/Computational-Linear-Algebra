@@ -1,0 +1,22 @@
+//Função que retorna a matriz de Householder de um vetor v.
+
+function [P] = retorn_P(x)
+
+     //início
+     
+     norma = 0;
+     for i = 1 : length(x)
+        norma = norma + x(i).^2; 
+     end
+     
+     norma = norma^(1/2); //norma do vetor x
+     
+     sinal = abs(x(1))/x(1); //sinal de x(i)
+     //disp(sinal)
+     v = x + (sinal * norma * eye(length(x), 1)); //construção de v 
+     //disp(v)
+     
+     P = eye(length(v), length(v)) - (2 / (v' * v)) * (v * v');
+
+     //fim 
+endfunction 

@@ -1,0 +1,19 @@
+// QUestao 1
+
+funcprot(0);
+function [autovalores] = lr(A)
+          exec("DLU.sci");
+          exec("tol.sci");
+          TOL = 1E-7;
+          n = size(A,1);
+          tolerancia = 0;
+          while(tolerancia == 0)
+               // aplicando a decomposição LU em A
+               [L, R] = DLU(A);
+               A = R*L; 
+               tolerancia = tol(A, TOL);
+          end
+          
+          autovalores = diag(A);     
+endfunction
+
